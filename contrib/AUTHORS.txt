@@ -1,0 +1,17 @@
+                   FLIGHTGEAR "SYNAPSE" AIRCRAFT - AUTHORS
+
+
+authors
+-------
+
+- hardball SLK
+
+
+thanks to
+---------
+
+- all contributors of the wiki which gives a precious help
+- buckaroo for samples files, yasim doc and for his help to the community
+- syd adams for samples files
+
+

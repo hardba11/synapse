@@ -1,0 +1,6 @@
+                  FLIGHTGEAR "SYNAPSE" AIRCRAFT - CHANGELOG
+
+
+changelog now on git : see https://github.com/hardba11/synapse/commits/master
+
+

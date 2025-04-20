@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /systems/
+-->
+
+<PropertyList>
+
+  <electrical>
+    <bus>
+      <avionics type="int">0</avionics>
+      <engines type="int">0</engines>
+      <commands type="int">0</commands>
+    </bus>
+  </electrical>
+
+  <!-- air/air refuelling ability -->
+  <refuel>
+    <type type="string">probe</type>
+    <serviceable type="bool">0</serviceable> <!-- true if probe equipped -->
+    <contact type="bool">0</contact>
+    <max-fuel-transfer-lbs-min>3000</max-fuel-transfer-lbs-min>
+    <offset-x-m>-5.9</offset-x-m>
+    <offset-y-m>.4</offset-y-m>
+    <offset-z-m>1</offset-z-m>
+  </refuel>
+
+</PropertyList>
+
+

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#             MAIN PROPERTIES DESCRIPTION AND INITIALISATION
+#
+################################################################################
+
+http://wiki.flightgear.org/Property_tree
+
+-->
+
+<PropertyList>
+  <!--
+================================================================================
+                                                                  SIM PROPERTIES
+================================================================================
+  -->
+  <sim>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ metadata -->
+    <description type="string">synapse</description>
+    <long-description type="string">Synapse is a loyal wingman.</long-description>
+    <aircraft-version type="string">20250406</aircraft-version>
+    <minimum-fg-version type="string">2017.1.1</minimum-fg-version>
+
+    <!-- old / simple style -->
+    <author type="string">hardball SLK</author>
+
+    <!-- new in FlightGear 2018.3.0 style -->
+    <authors>
+      <author n="0">
+        <name>hardball SLK</name>
+        <description>model, FDM, systems</description>
+        <nick>F-HRDB</nick>
+      </author>
+    </authors>
+    <maintainers>
+      <maintainer n="0">
+        <name>hardball SLK</name>
+        <email>nico@localhost</email>
+      </maintainer>
+    </maintainers>
+
+    <primary-set type="bool">true</primary-set>
+    <urls>
+      <home-page>https://hardba11.github.io/synapse/</home-page>
+      <support />
+      <wikipedia />
+      <code-repository>https://github.com/hardba11/synapse</code-repository>
+    </urls>
+
+    <presets>
+      <my-master-callsign type="string">undef</my-master-callsign>
+      <onground>0</onground>
+      <engines_started type="int">1</engines_started>
+      <altitude-ft>20000</altitude-ft>
+      <airspeed-kt>400</airspeed-kt>
+      <heading-deg>360</heading-deg>
+    </presets>
+
+    <status type="string">early production</status>
+    <tags>
+      <!-- aircraftTypeTags -->
+      <tag>fighter</tag>
+      <!-- eraTags -->
+      <tag>2020s</tag>
+      <!-- featureTags -->
+      <tag>delta</tag>
+      <tag>retractable-gear</tag>
+      <tag>supersonic</tag>
+      <!-- propulsionTags -->
+      <tag>jet</tag>
+    </tags>
+
+    <rating>
+      <FDM type="int">2</FDM>
+      <systems type="int">2</systems>
+      <cockpit type="int">4</cockpit>
+      <model type="int">4</model>
+    </rating>
+
+    <previews>
+      <preview>
+        <type>exterior</type>
+        <splash type="bool">true</splash>
+        <path>contrib/preview.png</path>
+      </preview>
+    </previews>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ flight model -->
+    <flight-model>yasim</flight-model>
+    <aero>core/synapse-yasim</aero>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ airport -->
+    <airport>
+      <runways>
+        <start-offset-m>30</start-offset-m>
+      </runways>
+    </airport>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ model -->
+    <model>
+
+      <name type="string">synapse</name>
+      <path type="string">Aircraft/synapse/models/synapse.xml</path>
+
+      <!-- @see AI/Aircraft/fallback_models.xml -->
+      <fallback-model-index type="int">527</fallback-model-index>
+
+      <constant type="int">1</constant>
+
+      <rendering>
+        <relative-navlight-luminosity type="float">0</relative-navlight-luminosity>
+        <relative-strobelight-luminosity type="float">0</relative-strobelight-luminosity>
+        <relative-taxilight-luminosity type="float">0</relative-taxilight-luminosity>
+      </rendering>
+
+    </model>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ flight recorder -->
+    <flight-recorder include="include/sim-flight-recorder.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ sound -->
+    <sound>
+      <path type="string">sounds/sounds.xml</path>
+    </sound>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ specific menu -->
+    <gui n="0" include="gui/gui-theme.xml" />
+    <menubar include="gui/specific-menu.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ initialisation -->
+    <startup>
+      <splash-texture>contrib/splash-01.png</splash-texture>
+      <splash-title>loading synapse ...</splash-title>
+    </startup>
+    <virtual-cockpit archive="y">true</virtual-cockpit>
+    <allow-toggle-cockpit archive="y">true</allow-toggle-cockpit>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ views -->
+    <view n="0"     include="include/sim-view0-properties.xml" />
+    <view n="101"   include="include/sim-view101-properties.xml" />
+    <view n="102"   include="include/sim-view102-properties.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ huds -->
+    <hud            include="include/sim-hud-properties.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ multiplay -->
+    <multiplay      include="include/sim-multiplay-properties.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ rendering -->
+    <rendering      include="include/sim-rendering-properties.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ help -->
+    <help           include="docs/sim-help.xml" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~ systems -->
+    <systems>
+      <property-rule n="100">
+        <name>synapse-filters</name>
+        <path>Aircraft/synapse/models/synapse-filters.xml</path>
+        <serviceable type="bool">1</serviceable>
+      </property-rule>
+
+      <!-- ~~~~~~~~~~~~~~~~~~ autopilot -->
+      <autopilot>
+        <path>core/autopilot.xml</path>
+      </autopilot>
+    </systems>
+
+    <failure-manager>
+      <engines>
+        <engine n="0">
+          <serviceable type="bool">1</serviceable>
+        </engine>
+        <engine n="1">
+          <serviceable type="bool">1</serviceable>
+        </engine>
+      </engines>
+    </failure-manager>
+
+    <freeze>
+      <fuel>1</fuel>
+    </freeze>
+
+  </sim>
+
+  <consumables>
+    <fuel>
+      <tank n="0"><level-norm>1.0</level-norm></tank>
+      <tank n="1"><level-norm>1.0</level-norm></tank>
+      <tank n="2"><level-norm>1.0</level-norm></tank>
+      <tank n="3"><level-norm>1.0</level-norm></tank>
+    </fuel>
+  </consumables>
+
+  <position>
+    <gear-agl-ft type="float">0</gear-agl-ft>
+  </position>
+
+  <surface-positions>
+    <out-left-aileron-pos-norm type="float">0</out-left-aileron-pos-norm>
+    <out-right-aileron-pos-norm type="float">0</out-right-aileron-pos-norm>
+    <out-elevator-pos-norm type="float">0</out-elevator-pos-norm>
+  </surface-positions>
+
+  <!-- tyre smoke and squeal when touchdown, data updated by synapse.nas -->
+  <gear>
+    <gear n="0">
+      <launchbar-position-norm type="float">0</launchbar-position-norm>
+    </gear>
+    <gear n="1">
+      <tyre-touchdown type="bool">0</tyre-touchdown>
+    </gear>
+    <gear n="2">
+      <tyre-touchdown type="bool">0</tyre-touchdown>
+    </gear>
+  </gear>
+
+  <!-- for tests and settings -->
+  <_debug>
+    <int1 type="int">0</int1>
+    <int2 type="int">0</int2>
+    <int3 type="int">0</int3>
+    <float1 type="float">0.0</float1>
+    <float2 type="float">0.0</float2>
+    <float3 type="float">0.0</float3>
+    <float4 type="float">0.0</float4>
+    <float5 type="float">0.0</float5>
+    <float6 type="float">0.0</float6>
+    <bool1 type="bool">0</bool1>
+    <show_devtools type="bool">0</show_devtools>
+    <instruments>
+      <hud_show_all type="bool">0</hud_show_all>
+    </instruments>
+  </_debug>
+
+  <!--
+================================================================================
+                                                                OTHER PROPERTIES
+================================================================================
+  -->
+
+  <systems          include="include/systems-properties.xml" />
+
+  <engines          include="include/engines-properties.xml" />
+
+  <input            include="include/input-properties.xml" />
+
+  <controls         include="include/controls-properties.xml" />
+
+  <instrumentation  include="include/instrumentation-properties.xml" />
+
+  <autopilot        include="include/autopilot-properties.xml" />
+
+  <environment      include="include/environment-properties.xml" />
+
+  <!--
+================================================================================
+                                                                           NASAL
+================================================================================
+  -->
+  <nasal>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ common/shared functions (no loop here) -->
+    <my_aircraft_functions>
+      <file type="string">functions.nas</file>
+    </my_aircraft_functions>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ specific instrument stand alone nasal -->
+    <instrument_hud>
+      <file type="string">instruments/hud/hud.nas</file>
+    </instrument_hud>
+    <instrument_nd>
+      <file type="string">instruments/nd/nd.nas</file>
+    </instrument_nd>
+    <instrument_pfd>
+      <file type="string">instruments/pfd/pfd.nas</file>
+    </instrument_pfd>
+    <instrument_light>
+      <file type="string">instruments/light/light.nas</file>
+    </instrument_light>
+    <instrument_hud_target_positions>
+      <file type="string">instruments/hud_target_positions/hud_target_positions.nas</file>
+    </instrument_hud_target_positions>
+    <instrument_sfd_eicas>
+      <file type="string">instruments/sfd/sfd_eicas.nas</file>
+    </instrument_sfd_eicas>
+    <instrument_sfd_radar>
+      <file type="string">instruments/sfd/sfd_radar.nas</file>
+    </instrument_sfd_radar>
+    <instrument_fuel>
+      <file type="string">instruments/fuel/fuel.nas</file>
+    </instrument_fuel>
+    <instrument_command_h>
+      <file type="string">instruments/command_h/command_h.nas</file>
+    </instrument_command_h>
+    <instrument_command_h_canvas>
+      <file type="string">instruments/command_h/alert_panel_canvas.nas</file>
+    </instrument_command_h_canvas>
+    <instrument_chrono>
+      <file type="string">instruments/chrono/chrono.nas</file>
+    </instrument_chrono>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ flight/commands/aircraft management -->
+    <core>
+      <!-- aircraft properties update -->
+      <file type="string">core/synapse.nas</file>
+      <!-- aircraft electrical and engines systems -->
+      <file type="string">core/systems.nas</file>
+      <!-- specific functions for starting/stopping aircraft -->
+      <file type="string">core/autostart.nas</file>
+      <!-- loops -->
+      <file type="string">core/main_loop.nas</file>
+    </core>
+
+    <!-- ~~~~~~~~~~~~~~~~~~ models and effects -->
+    <lights>
+      <file type="string">models/lights/lights.nas</file>
+    </lights>
+
+  </nasal>
+
+</PropertyList>
+

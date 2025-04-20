@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#      DEFINITION OF ALIASES OR INTERNAL PROPERTIES UPDATED BY INSTRUMENT
+#
+################################################################################
+
+PROPERTY-PATH : /instrumentation/my_aircraft/chrono/
+-->
+<PropertyList>
+
+  <et-hour type="int">0</et-hour>
+  <et-min type="int">0</et-min>
+  <et-sec type="int">0</et-sec>
+  <et-msec type="int">0</et-msec>
+  <needle-msec type="int">0</needle-msec>
+
+  <!-- les digits affichent des donnees differentes selon la source choisie,
+  ces donnees seront mises a jour via nasal en basculant les alias appropries -->
+  <outputs>
+    <digit-tl alias="/instrumentation/clock/local-hour" />
+    <digit-tr alias="/instrumentation/clock/indicated-min" />
+    <needle   alias="/instrumentation/clock/indicated-sec" />
+    <digit-bl alias="/sim/time/real/day" />
+    <digit-br alias="/sim/time/real/month" />
+    <colon type="bool">1</colon>
+  </outputs>
+
+  <controls>
+    <et-knob   type="int">1</et-knob>   <!-- 1=run -->
+    <mode-knob type="int">1</mode-knob> <!-- 1=local -->
+  </controls>
+
+</PropertyList>
+

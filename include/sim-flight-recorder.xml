@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /sim/flight-recorder/
+
+see :
+- https://sourceforge.net/p/flightgear/fgdata/ci/next/tree/Docs/README.flightrecorder
+-->
+
+<PropertyList>
+
+  <replay-config type="int">0</replay-config>
+  <config n="0" include="/Aircraft/Generic/flightrecorder/generic-jet.xml">
+    <name type="string">specific flight recorder</name>
+    <signal>
+      <type>float</type>
+      <property type="string">/engines/engine[0]/reheat</property>
+      <interpolation>linear</interpolation>
+    </signal>
+    <signal>
+      <type>float</type>
+      <property type="string">/engines/engine[1]/reheat</property>
+      <interpolation>linear</interpolation>
+    </signal>
+  </config>
+
+</PropertyList>
+
+

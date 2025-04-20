@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#      DEFINITION OF ALIASES OR INTERNAL PROPERTIES UPDATED BY INSTRUMENT
+#
+################################################################################
+
+PROPERTY-PATH : /instrumentation/my_aircraft/command_h/
+-->
+
+<PropertyList>
+  <sound_alert type="int">0</sound_alert>     <!-- play a sound -->
+  <sound_caution type="int">0</sound_caution> <!-- play a sound -->
+  <ack_alert type="int">0</ack_alert>         <!-- 1=btn clicked, nasal will process -->
+  <blink_alert type="int">0</blink_alert>     <!-- to creat blinking labels on instrument -->
+
+  <panel_status>
+    <engine0_status type="int">0</engine0_status>
+    <engine1_status type="int">0</engine1_status>
+    <hydraulics_status type="int">0</hydraulics_status>
+    <fuel_status type="int">0</fuel_status>
+    <gear_status type="int">0</gear_status>
+    <hook_status type="int">0</hook_status>
+    <speedbrake_status type="int">0</speedbrake_status>
+    <parkbrake_status type="int">0</parkbrake_status>
+    <canopy_status type="int">0</canopy_status>
+    <epu_status type="int">0</epu_status>
+    <reheat0_status type="int">0</reheat0_status>
+    <reheat1_status type="int">0</reheat1_status>
+    <bingo_status type="int">0</bingo_status>
+    <air_refuel_status type="int">0</air_refuel_status>
+    <avionics_status type="int">0</avionics_status>
+    <autotrim_status type="int">0</autotrim_status>
+    <ap_status type="int">0</ap_status>
+  </panel_status>
+
+  <message>
+    <info type="string" />
+    <caution type="string" />
+    <alert type="string" />
+  </message>
+
+</PropertyList>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /controls/
+-->
+
+<PropertyList>
+
+  <flight>
+    <!-- init properties used by fcm.nas autopilot and yasim -->
+    <fbw-elevator type="float">0.00</fbw-elevator>
+    <fdm-elevator type="float">0.00</fdm-elevator>
+    <fbw-aileron type="float">0.00</fbw-aileron>
+    <fdm-aileron type="float">0.00</fdm-aileron>
+    <fbw-rudder type="float">0.00</fbw-rudder>
+    <fdm-rudder type="float">0.00</fdm-rudder>
+    <autotrim-pitch type="bool">0</autotrim-pitch>
+    <slats type="float">0.00</slats>
+  </flight>
+
+  <hack>
+    <engine n="0">
+      <throttle alias="/controls/engines/engine[0]/throttle" />
+    </engine>
+    <engine n="1">
+      <throttle alias="/controls/engines/engine[1]/throttle" />
+    </engine>
+  </hack>
+  <hydraulic>
+    <system>
+      <engine-pump type="bool">0</engine-pump>
+    </system>
+  </hydraulic>
+
+  <gear>
+    <brake-parking>0</brake-parking>
+  </gear>
+
+  <doors>
+    <canopy type="float">0</canopy>
+  </doors>
+
+  <pax>
+    <helmet type="float">37</helmet>
+    <copilot-head type="int">-25</copilot-head>
+    <pilot type="bool">1</pilot>
+    <copilot type="bool">1</copilot>
+  </pax>
+
+  <refuel-pod>
+    <pipe-extended type="int">0</pipe-extended>
+  </refuel-pod>
+
+  <lighting>
+    <!-- set properties : lights off at start -->
+    <nav-lights type="int">0</nav-lights>
+    <pos-lights type="int">0</pos-lights>
+    <beacon type="int">0</beacon>
+    <strobe type="int">0</strobe>
+    <taxi-light type="int">0</taxi-light>
+    <landing-lights type="int">0</landing-lights>
+    <formation-lights type="double">0</formation-lights>
+    <panel-norm type="double">0</panel-norm>
+    <instruments-norm type="double">0</instruments-norm>
+  </lighting>
+
+</PropertyList>
+
+

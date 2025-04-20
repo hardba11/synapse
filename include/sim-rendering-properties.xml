@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /sim/rendering/
+-->
+
+<PropertyList>
+
+  <redout>
+    <parameters>
+      <blackout-complete-g>10</blackout-complete-g>
+      <blackout-onset-g>8</blackout-onset-g>
+    </parameters>
+  </redout>
+
+</PropertyList>
+
+

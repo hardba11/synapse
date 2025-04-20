@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                  synapse specific aircraft menu
+#
+################################################################################
+
+changelog
+- 2016-10-22 : create
+
+-->
+
+<PropertyList>
+
+  <default>
+
+    <menu n="3">
+      <name>Autopilot</name>
+      <enabled type="bool">0</enabled>
+      <item n="0">
+        <enabled type="bool">0</enabled>
+      </item>
+    </menu>
+
+    <menu n="101">
+      <label>synapse</label>
+
+      <item n="0">
+        <label>Commands ...</label>
+        <name>commands</name>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>synapse-commands</dialog-name>
+        </binding>
+      </item>
+
+      <item n="1">
+        <label>Set views ...</label>
+        <name>set-views</name>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>synapse-set-views</dialog-name>
+        </binding>
+      </item>
+
+      <item n="2">
+        <label>Auto Pilot ...</label>
+        <name>synapse-autopilot</name>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>synapse-autopilot</dialog-name>
+        </binding>
+      </item>
+
+    </menu>
+
+  </default>
+
+</PropertyList>
+
+
+
+

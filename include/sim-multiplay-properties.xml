@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /sim/multiplay/
+-->
+
+<PropertyList>
+
+  <!-- http://wiki.flightgear.org/Multiplayer_protocol#Multiplay_debug-level -->
+  <!--debug-level>1</debug-level-->
+
+  <visibility-range-nm type="int">160</visibility-range-nm>
+
+  <generic>
+
+    <int                  n="2" />
+
+    <float                n="2"  alias="/controls/lighting/formation-lights" />
+    <float                n="4"  alias="/gear/gear[0]/rollspeed-ms" />
+    <float                n="5"  alias="/gear/gear[1]/rollspeed-ms" />
+    <float                n="6"  alias="/gear/gear[2]/rollspeed-ms" />
+    <float                n="7"  alias="/gear/gear[0]/steering-norm" />
+    <float                n="8"  alias="/engines/engine[0]/reheat" />
+    <float                n="9"  alias="/engines/engine[1]/reheat" />
+    <float                n="10" alias="/gear/gear[0]/wow" />
+    <float                n="11" alias="/gear/gear[1]/wow" />
+    <float                n="12" alias="/gear/gear[2]/wow" />
+
+    <string               n="0"  alias="/sim/model/smoking-color" />
+
+  </generic>
+
+</PropertyList>
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#                              PROPERTY TREE INIT
+#
+################################################################################
+
+PROPERTY-PATH : /sim/view[0]/
+-->
+
+<PropertyList>
+
+  <name type="string">Internal View</name>
+  <internal type="bool" archive="y">true</internal>
+  <config>
+    <x-offset-m archive="y" type="double">.0</x-offset-m>
+    <y-offset-m archive="y" type="double">1.15</y-offset-m>
+    <z-offset-m archive="y" type="double">-3.32</z-offset-m>
+    <pitch-offset-deg>-10</pitch-offset-deg>
+    <default-field-of-view-deg type="double">70.0</default-field-of-view-deg>
+    <dynamic-view type="bool">true</dynamic-view>
+    <limits>
+      <enabled type="bool">true</enabled>
+      <left>
+        <heading-max-deg type="double">185</heading-max-deg>
+      </left>
+      <right>
+        <heading-max-deg type="double">185</heading-max-deg>
+      </right>
+    </limits>
+  </config>
+
+</PropertyList>
+
+

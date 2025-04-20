@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <name>synapse-autopilot</name>
+  <layout>vbox</layout>
+
+	<group>
+		<layout>hbox</layout>
+
+		<text>
+			<label>Synapse Autopilot Settings</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<legend>X</legend>
+			<key>Esc</key>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+	</group>
+
+  <hrule/>
+
+
+  <group>
+    <layout>vbox</layout>
+    <group>
+      <layout>table</layout>
+
+<!-- hdg -->
+      <text>
+        <label>Heading Bug</label>
+        <halign>right</halign>
+        <row>0</row>
+        <col>0</col>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/heading-deg</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+            <![CDATA[
+setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
+            ]]>
+          </script>
+        </binding>
+      </input>
+
+<!-- spd -->
+      <text>
+        <label>Speed with Throttle</label>
+        <halign>right</halign>
+        <row>1</row>
+        <col>0</col>
+      </text>
+      <input>
+        <row>1</row>
+        <col>1</col>
+        <property>/sim/presets/airspeed-kt</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+
+<!-- alt -->
+      <text>
+        <label>Altitude Hold</label>
+        <halign>right</halign>
+        <row>2</row>
+        <col>0</col>
+      </text>
+      <input>
+        <row>2</row>
+        <col>1</col>
+        <property>/sim/presets/altitude-ft</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+
+    </group>
+  </group>
+
+  <hrule/>
+
+  <button>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+  </button>
+
+</PropertyList>

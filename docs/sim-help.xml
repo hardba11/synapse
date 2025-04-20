@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+################################################################################
+#
+#             THIS FILE IS SHOWN IN THE SIM AS AIRCRAFT HELP
+#
+################################################################################
+
+PROPERTY-PATH : PropertyList > sim > help
+
+changelog
+- 2016-10-22 : create
+
+-->
+
+<PropertyList>
+  <text>
+NUMPAD LAYOUT
+0
+- decr speed
+2
+- incr alt
+4
+- hdg left
+6
+- hdg right
+7
+- view panels
+8
+- decr alt
++
+- inc speed
+  </text>
+
+</PropertyList>
+
+
+
+
