@@ -317,10 +317,6 @@ vitesse affichee sur le hud
                                                                        AUTOPILOT
 ================================================================================
   -->
-  <!-- Bourrasque Autopilot -->
-  <!-- Retuned and Overhauled -->
-  <!-- (c) 2018 Joshua Davidson (it0uchpods) -->
-
   <!--
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                                                    LATERAL MODES
@@ -615,7 +611,7 @@ vitesse affichee sur le hud
   <predict-simple>
     <name>altitude-2-sec-ahead</name>
     <debug>false</debug>
-    <input>/instrumentation/altimeter/indicated-altitude-ft</input>
+    <input>/position/altitude-ft</input>
     <output>/autopilot/internal/altitude-2-sec-ahead</output>
     <seconds>2.0</seconds>
     <filter-gain>0.0</filter-gain>
@@ -919,7 +915,7 @@ vitesse affichee sur le hud
                                                                   VELOCITY MODES
   -->
 
-  <!-- ~~~~~~~~~~~~~~~~~~ auto-throttle airborn -->
+  <!-- ~~~~~~~~~~~~~~~~~~ auto-throttle -->
   <pid-controller>
     <name>throttle</name>
     <debug>false</debug>

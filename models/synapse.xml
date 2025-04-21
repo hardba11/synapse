@@ -37,6 +37,12 @@
     </condition>
   </animation>
 
+  <!-- ~~~~~~~~~~~~~~~~~~ smoke -->
+  <model>
+    <name>smoke-model</name>
+    <path>Aircraft/synapse/models/smoke/smoke-model.xml</path>
+  </model>
+
   <!-- ~~~~~~~~~~~~~~~~~~ contrails -->
   <model>
     <name>left contrail</name>
@@ -62,92 +68,18 @@
     <name>left tiptrail</name>
     <path>Aircraft/synapse/models/effects/tiptrail/tiptrail.xml</path>
     <offsets>
-      <x-m type="float">4</x-m>
-      <y-m type="float">-5</y-m>
-      <z-m type="float">.05</z-m>
+      <x-m type="float">4.5</x-m>
+      <y-m type="float">-6</y-m>
+      <z-m type="float">0</z-m>
     </offsets>
   </model>
   <model>
     <name>right tiptrail</name>
     <path>Aircraft/synapse/models/effects/tiptrail/tiptrail.xml</path>
     <offsets>
-      <x-m type="float">4</x-m>
-      <y-m type="float">5</y-m>
+      <x-m type="float">4.5</x-m>
+      <y-m type="float">6</y-m>
       <z-m type="float">.05</z-m>
-    </offsets>
-  </model>
-
-  <!-- ~~~~~~~~~~~~~~~~~~ rain ground effects -->
-  <!-- front gear -->
-  <model>
-    <path>Aircraft/synapse/models/effects/rain/rain_gear0.xml</path>
-    <offsets>
-      <x-m type="float">-2.60</x-m>
-      <y-m type="float">0</y-m>
-      <z-m type="float">-1.5</z-m>
-    </offsets>
-  </model>
-
-  <!-- left gear -->
-  <model>
-    <path>Aircraft/synapse/models/effects/rain/rain_gear1.xml</path>
-    <offsets>
-      <x-m type="float">2.5</x-m>
-      <y-m type="float">-1.7</y-m>
-      <z-m type="float">-1</z-m>
-    </offsets>
-  </model>
-
-  <!-- right gear -->
-  <model>
-    <path>Aircraft/synapse/models/effects/rain/rain_gear2.xml</path>
-    <offsets>
-      <x-m type="float">2.5</x-m>
-      <y-m type="float">1.7</y-m>
-      <z-m type="float">-1</z-m>
-    </offsets>
-  </model>
-
-  <!-- exhausts -->
-  <model>
-    <path>Aircraft/synapse/models/effects/rain/rain_exhaust.xml</path>
-    <offsets>
-      <x-m type="float">5</x-m>
-      <y-m type="float">0</y-m>
-      <z-m type="float">0</z-m>
-    </offsets>
-  </model>
-
-  <!-- ~~~~~~~~~~~~~~~~~~ smoke touchdown effects -->
-
-  <!-- left gear -->
-  <model>
-    <path>Aircraft/synapse/models/effects/touchdown/touchdown_gear1.xml</path>
-    <offsets>
-      <x-m type="float">2.5</x-m>
-      <y-m type="float">-1.7</y-m>
-      <z-m type="float">-1</z-m>
-    </offsets>
-  </model>
-
-  <!-- right gear -->
-  <model>
-    <path>Aircraft/synapse/models/effects/touchdown/touchdown_gear2.xml</path>
-    <offsets>
-      <x-m type="float">2.5</x-m>
-      <y-m type="float">1.7</y-m>
-      <z-m type="float">-1</z-m>
-    </offsets>
-  </model>
-
-  <!-- ~~~~~~~~~~~~~~~~~~ pushback -->
-  <model>
-    <name>Pushback</name>
-    <path>Models/Airport/Pushback/Military.xml</path>
-    <offsets>
-     <x-m>-2.75</x-m>
-     <y-m>0</y-m>
-     <z-m>-1.4</z-m>
     </offsets>
   </model>
 

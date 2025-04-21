@@ -30,7 +30,7 @@ https://sourceforge.net/p/flightgear/fgdata/ci/next/tree/Docs/README.gui
 
   <hrule />
 
-  <!-- ~~~~~~~~~~~~~~~~~~ hippodrome -->
+  <!-- ~~~~~~~~~~~~~~~~~~ hippodrome
   <group>
     <layout>table</layout>
     <halign>left</halign>
@@ -65,6 +65,7 @@ my_aircraft_functions.event_toggle_hippodrome(1);
   </group>
 
   <hrule />
+ -->
 
   <!-- ~~~~~~~~~~~~~~~~~~ smoke from pod -->
   <group>

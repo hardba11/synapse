@@ -144,49 +144,132 @@ var hippo_loop = func()
 
 var listen_master_ap_loop = func()
 {
-    var trouve = 0;
+    var master_is_found = 0;
 
     var alt = getprop("/sim/presets/altitude-ft") or 20000;
     var speed = getprop("/sim/presets/airspeed-kt") or 250;
     var hdg = getprop("/sim/presets/heading-deg") or 0;
+    var callsign_target = 'callsign_target';
+    var fix_target = 'fix_target';
 
-    var my_master_callsign = props.globals.getNode("/sim/presets/my-master-callsign").getValue() or 'undef';
-    if(my_master_callsign == 'undef')
-    {
-        print('no master');
-    }
-    else
+    # on recherche le master parmi les multiplayers et on recupere ses ordres
+    var my_master_callsign = props.globals.getNode("/sim/presets/my-master-callsign").getValue() or 'my_master_callsign';
+    if(my_master_callsign != 'my_master_callsign')
     {
         var list_mp_obj = props.globals.getNode("/ai/models").getChildren("multiplayer");
         for(var i = 0; i < size(list_mp_obj); i += 1)
         {
-            var target_callsign = list_mp_obj[i].getNode("callsign").getValue() or '';
-            if(target_callsign == my_master_callsign)
+            var mp_callsign = list_mp_obj[i].getNode("callsign").getValue() or '';
+            var is_valid = list_mp_obj[i].getNode("valid").getValue() or false;
+            if((mp_callsign == my_master_callsign) and is_valid)
             {
-                var is_valid = list_mp_obj[i].getNode("valid").getValue() or false;
+                master_is_found = 1;
+
+                # master found, get ap settings
                 alt = list_mp_obj[i].getNode("sim/multiplay/generic/int[14]").getValue() or '';
                 speed = list_mp_obj[i].getNode("sim/multiplay/generic/int[15]").getValue() or '';
-                lat = list_mp_obj[i].getNode("sim/multiplay/generic/float[14]").getValue() or '';
-                lng = list_mp_obj[i].getNode("sim/multiplay/generic/float[15]").getValue() or '';
-
-                if(is_valid and (alt != '') and (speed != '') and (lat != '') and (lng != ''))
-                {
-                    #print('trouve : '~ target_callsign);
-                    trouve = 1;
-                }
-
-#lat = list_mp_obj[i].getNode("position/latitude-deg").getValue() or '0';
-#lng = list_mp_obj[i].getNode("position/longitude-deg").getValue() or '0';
-
-
-
+                lat = list_mp_obj[i].getNode("sim/multiplay/generic/float[14]").getValue() or 0;
+                lng = list_mp_obj[i].getNode("sim/multiplay/generic/float[15]").getValue() or 0;
+                callsign_target = list_mp_obj[i].getNode("sim/multiplay/generic/string[1]").getValue() or 'callsign_target';
+                fix_target = list_mp_obj[i].getNode("sim/multiplay/generic/string[2]").getValue() or 'fix_target';
                 break;
             }
         }
     }
 
-    if(trouve == 0)
+    var magnetic_variation_deg = getprop("/environment/magnetic-variation-deg") or 0;
+    if(master_is_found == 1)
     {
+        # on a un master, on suit ses ordres
+
+        setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
+
+        # le drone doit suivre un callsign, on le recherche :
+        var callsign_target_found = 0;
+        if(callsign_target != 'callsign_target')
+        {
+            for(var i = 0; i < size(list_mp_obj); i += 1)
+            {
+                var callsign = list_mp_obj[i].getNode("callsign").getValue() or '';
+                var is_valid = list_mp_obj[i].getNode("valid").getValue() or false;
+                if((callsign_target == callsign) and is_valid)
+                {
+                    callsign_target_found = 1;
+                    setprop("/sim/presets/following-type", 'TARGET');
+                    setprop("/sim/presets/following", callsign_target);
+
+
+                    var target_true_hdg = list_mp_obj[i].getNode("orientation/true-heading-deg").getValue() or 0;
+                    var target_lat = list_mp_obj[i].getNode("position/latitude-deg").getValue() or '0';
+                    var target_lng = list_mp_obj[i].getNode("position/longitude-deg").getValue() or '0';
+                    var target_speed = list_mp_obj[i].getNode("velocities/true-airspeed-kt").getValue() or 0;
+                    var target_altitude = list_mp_obj[i].getNode("position/altitude-ft").getValue() or 0;
+                    var target_range = list_mp_obj[i].getNode("radar/range-nm").getValue() or 0;
+                    var target_bearing = list_mp_obj[i].getNode("radar/bearing-deg").getValue() or 0;
+                    var target_rotation = list_mp_obj[i].getNode("radar/rotation").getValue() or 0;
+
+                    var heading_from_target = geo.normdeg(target_bearing + 180 - target_true_hdg);
+                    var speed_factor = (target_range < 3) ? target_range : 4;
+                    speed_factor = speed_factor * math.cos((heading_from_target) * D2R) * -0.4;
+
+                    coords_to_follow = geo.Coord.new();
+                    coords_to_follow.set_latlon(target_lat, target_lng);
+                    coords_to_follow.apply_course_distance(target_true_hdg + 2, 4000);
+                    lat = coords_to_follow.lat();
+                    lng = coords_to_follow.lon();
+                    if(target_range > 6)
+                    {
+                        speed = (target_speed + 400);
+                    }
+                    else
+                    {
+                        speed = (target_speed + (target_speed * speed_factor));
+                    }
+                    speed = (speed > 650) ? 650 : speed;
+                    speed = (speed < 150) ? 150 : speed;
+                    alt = target_altitude + 15;
+
+                    var my_position = geo.aircraft_position();
+                    var wp = geo.Coord.new();
+                    wp.set_latlon(lat, lng);
+                    hdg = geo.normdeg(my_position.course_to(wp) - magnetic_variation_deg);
+
+                    break;
+                }
+            }
+        }
+
+        # le drone doit atteindre un fix :
+        var fix_target_found = 0;
+        if((callsign_target_found == 0) and (fix_target != ''))
+        {
+            var fixes = findFixesByID(fix_target);
+            if(size(fixes) > 0)
+            {
+                fix_target_found = 1;
+                setprop("/sim/presets/following-type", 'FIX');
+                setprop("/sim/presets/following", fix_target);
+
+                var fix = courseAndDistance(fixes[0]);
+                hdg = geo.normdeg(fix[0] - magnetic_variation_deg);
+            }
+        }
+
+        if((callsign_target_found == 0) and (fix_target_found == 0))
+        {
+            setprop("/sim/presets/following-type", '---');
+            setprop("/sim/presets/following", 'hippodrome');
+        }
+
+        setprop("/autopilot/settings/target-speed-kt", speed);
+        setprop("/autopilot/settings/target-altitude-ft", alt);
+        setprop("/autopilot/settings/heading-bug-deg", hdg);
+        #print('MASTER FOUND : setting from master : alt='~ alt ~' - speed='~ speed ~' - hdg='~ hdg);
+    }
+    else
+    {
+        # on n'a pas de master, on passe en hippodrome
+
         setprop("/autopilot/settings/target-speed-kt", speed);
         setprop("/autopilot/settings/target-altitude-ft", alt);
         var hippo_enabled = getprop("/instrumentation/my_aircraft/pfd/controls/hippodrome") or 0;
@@ -196,25 +279,6 @@ var listen_master_ap_loop = func()
             settimer(func() { setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 1); }, 2);
             #print('NO MASTER FOUND : setting from presets : alt='~ alt ~' - speed='~ speed ~' - hdg='~ hdg);
         }
-        else
-        {
-            #print('NO MASTER FOUND : hippo enabled : NOOP');
-        }
-    }
-    else
-    {
-        setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
-
-        setprop("/autopilot/settings/target-speed-kt", speed);
-        setprop("/autopilot/settings/target-altitude-ft", alt);
-
-        var my_position = geo.aircraft_position();
-        var wp = geo.Coord.new();
-        wp.set_latlon(lat, lng);
-
-        var hdg = my_position.course_to(wp);
-        setprop("/autopilot/settings/heading-bug-deg", hdg);
-        #print('MASTER FOUND : setting from master : alt='~ alt ~' - speed='~ speed ~' - hdg='~ hdg);
     }
 }
 

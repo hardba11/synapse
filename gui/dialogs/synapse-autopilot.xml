@@ -38,7 +38,7 @@
 
 <!-- hdg -->
       <text>
-        <label>Heading Bug</label>
+        <label>Heading Bug Mag</label>
         <halign>right</halign>
         <row>0</row>
         <col>0</col>
@@ -63,7 +63,7 @@ setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
 
 <!-- spd -->
       <text>
-        <label>Speed with Throttle</label>
+        <label>True Air Speed</label>
         <halign>right</halign>
         <row>1</row>
         <col>0</col>
@@ -80,7 +80,7 @@ setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
 
 <!-- alt -->
       <text>
-        <label>Altitude Hold</label>
+        <label>Altitude</label>
         <halign>right</halign>
         <row>2</row>
         <col>0</col>

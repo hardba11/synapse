@@ -57,6 +57,8 @@ http://wiki.flightgear.org/Property_tree
       <altitude-ft>20000</altitude-ft>
       <airspeed-kt>400</airspeed-kt>
       <heading-deg>360</heading-deg>
+      <following-type stype="string"></following-type>
+      <following stype="string"></following>
     </presets>
 
     <status type="string">early production</status>
