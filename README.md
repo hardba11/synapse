@@ -29,6 +29,7 @@ You can choose your desired altitude, speed, and heading.
 Replace `MY_CALLSIGN` with the callsign of your master aircraft.
 
 ```
+--callsign=MY_UAV
 --in-air
 --offset-distance=0
 --vc=250
@@ -75,10 +76,10 @@ These must be located in `/sim/multiplay/generic/`
 Make sure these properties are available and unused :
 
 ```
-    <int                  n="14" type="int">12500</int>  <!-- loyal wingman: alt -->
-    <int                  n="15" type="int">220</int>    <!-- loyal wingman: speed -->
-    <string               n="1"  type="string"></string> <!-- loyal wingman: callsign to follow -->
-    <string               n="2"  type="string"></string> <!-- loyal wingman: fix -->
+<int                  n="14" type="int">12500</int>  <!-- loyal wingman: alt -->
+<int                  n="15" type="int">220</int>    <!-- loyal wingman: speed -->
+<string               n="1"  type="string"></string> <!-- loyal wingman: callsign to follow -->
+<string               n="2"  type="string"></string> <!-- loyal wingman: fix -->
 ```
 
 See the file: `bourrasque/include/sim-multiplay-properties.xml`
@@ -86,23 +87,10 @@ See the file: `bourrasque/include/sim-multiplay-properties.xml`
 **2- Add a Loyal Wingman menu**
 
 For examples, see the following files:
-- bourrasque/gui/dialogs/synapse-autopilot.xml
-- bourrasque/gui/specific-menu.xml
+- `bourrasque/gui/dialogs/synapse-autopilot.xml`
+- `bourrasque/gui/specific-menu.xml`
 
 
-
-
-
-
-
-
-
-vous pouvez utiliser le menu `brsq - Loyal Wingman...` afin de diriger votre drone.
-- si vous saisissez un callsign, le drone ira l'intercepter. vous pouvez mettre votre `MY_CALLSIGN` par exemple
-- si vous saisissez un fix (VOR, airport, etc), le drone ira sur ce fix à la vitesse et l'altitude souhaitée
-- sinon le drone se mettra en hippodome à la vitesse et l'altitude souhaitée
-
-sur le hud du drone apparaissent en haut à gauche le callsign du master et si un FIX ou une TARGET sont definis
 
 
 
