@@ -132,6 +132,19 @@ see :
     <halign>left</halign>
     <box>false</box>
   </label>
+  <label>
+    <name>target</name>
+    <x>-125</x>
+    <y>-6</y>
+    <width>60</width>
+    <height>10</height>
+    <input>
+      <property>/sim/presets/following-range</property>
+    </input>
+    <format>%.1f NM</format>
+    <halign>left</halign>
+    <box>false</box>
+  </label>
 
   <label>
     <name>AP Speed Label top</name>

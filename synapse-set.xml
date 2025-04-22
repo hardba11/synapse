@@ -59,6 +59,8 @@ http://wiki.flightgear.org/Property_tree
       <heading-deg>360</heading-deg>
       <following-type stype="string"></following-type>
       <following stype="string"></following>
+      <following-range stype="string"></following-range>
+
     </presets>
 
     <status type="string">early production</status>

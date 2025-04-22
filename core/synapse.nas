@@ -208,13 +208,15 @@ var listen_master_ap_loop = func()
                     var target_bearing = list_mp_obj[i].getNode("radar/bearing-deg").getValue() or 0;
                     var target_rotation = list_mp_obj[i].getNode("radar/rotation").getValue() or 0;
 
+                    setprop("/sim/presets/following-range", target_range);
+
                     var heading_from_target = geo.normdeg(target_bearing + 180 - target_true_hdg);
                     var speed_factor = (target_range < 3) ? target_range : 4;
-                    speed_factor = speed_factor * math.cos((heading_from_target) * D2R) * -0.4;
+                    speed_factor = speed_factor * math.cos((heading_from_target) * D2R) * -0.45;
 
                     coords_to_follow = geo.Coord.new();
                     coords_to_follow.set_latlon(target_lat, target_lng);
-                    coords_to_follow.apply_course_distance(target_true_hdg + 2, 4000);
+                    coords_to_follow.apply_course_distance(target_true_hdg + 1, (5 * target_speed));
                     lat = coords_to_follow.lat();
                     lng = coords_to_follow.lon();
                     if(target_range > 6)
@@ -243,22 +245,42 @@ var listen_master_ap_loop = func()
         var fix_target_found = 0;
         if((callsign_target_found == 0) and (fix_target != ''))
         {
-            var fixes = findFixesByID(fix_target);
+            var fixes = [];
+            var type = '';
+            if(size(fix_target) == 5)
+            {
+                fixes = findFixesByID(fix_target);
+                type = 'FIX';
+            }
+            elsif(size(fix_target) == 4)
+            {
+                fixes = findAirportsByICAO(fix_target);
+                type = 'AIRPRT';
+            }
+            elsif(size(fix_target) == 3)
+            {
+                fixes = findNavaidsByID(fix_target, 'ndb');
+                type = 'NDB';
+            }
+
             if(size(fixes) > 0)
             {
                 fix_target_found = 1;
-                setprop("/sim/presets/following-type", 'FIX');
+                setprop("/sim/presets/following-type", type);
                 setprop("/sim/presets/following", fix_target);
 
                 var fix = courseAndDistance(fixes[0]);
                 hdg = geo.normdeg(fix[0] - magnetic_variation_deg);
+                setprop("/sim/presets/following-range", fix[1]);
             }
+
         }
 
         if((callsign_target_found == 0) and (fix_target_found == 0))
         {
             setprop("/sim/presets/following-type", '---');
             setprop("/sim/presets/following", 'hippodrome');
+            setprop("/sim/presets/following-range", '');
         }
 
         setprop("/autopilot/settings/target-speed-kt", speed);
@@ -269,6 +291,10 @@ var listen_master_ap_loop = func()
     else
     {
         # on n'a pas de master, on passe en hippodrome
+
+        setprop("/sim/presets/following-type", '---');
+        setprop("/sim/presets/following", 'hippodrome');
+        setprop("/sim/presets/following-range", '');
 
         setprop("/autopilot/settings/target-speed-kt", speed);
         setprop("/autopilot/settings/target-altitude-ft", alt);
