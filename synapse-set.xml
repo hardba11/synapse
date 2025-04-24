@@ -52,8 +52,12 @@ http://wiki.flightgear.org/Property_tree
 
     <presets>
       <my-master-callsign type="string">undef</my-master-callsign>
+
+      <!-- started airborn -->
       <onground>0</onground>
       <engines_started type="int">1</engines_started>
+
+      <!-- AP settings, see core/synapse.nas -->
       <altitude-ft>20000</altitude-ft>
       <airspeed-kt>400</airspeed-kt>
       <heading-deg>360</heading-deg>
@@ -192,10 +196,10 @@ http://wiki.flightgear.org/Property_tree
 
   <consumables>
     <fuel>
-      <tank n="0"><level-norm>1.0</level-norm></tank>
-      <tank n="1"><level-norm>1.0</level-norm></tank>
-      <tank n="2"><level-norm>1.0</level-norm></tank>
-      <tank n="3"><level-norm>1.0</level-norm></tank>
+      <tank n="0"><level-norm>0.2</level-norm></tank>
+      <tank n="1"><level-norm>0.2</level-norm></tank>
+      <tank n="2"><level-norm>0.2</level-norm></tank>
+      <tank n="3"><level-norm>0.2</level-norm></tank>
     </fuel>
   </consumables>
 

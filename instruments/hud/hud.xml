@@ -212,7 +212,7 @@ see :
   <label>
     <name>KIAS</name>
     <x>-130</x>
-    <y>-75</y>
+    <y>-45</y>
     <width>40</width>
     <height>10</height>
     <input>
@@ -228,7 +228,7 @@ see :
       <property>/velocities/mach</property>
     </input>
     <x>-130</x>
-    <y>-90</y>
+    <y>-60</y>
     <width>40</width>
     <height>10</height>
     <format>%4.2fM</format>
@@ -239,7 +239,7 @@ see :
   <label>
     <name>Altitude</name>
     <x>80</x>
-    <y>-75</y>
+    <y>-45</y>
     <width>40</width>
     <height>10</height>
     <input>
@@ -252,7 +252,7 @@ see :
   <label>
     <name>flight level</name>
     <x>80</x>
-    <y>-90</y>
+    <y>-60</y>
     <width>40</width>
     <height>8</height>
     <input>
@@ -358,7 +358,20 @@ see :
       </or>
     </condition>
   </gauge>
-
+<!-- ~~~~~~~~~~~~~~~~~~ speed brake -->
+  <label>
+    <name>Speed Brake</name>
+    <input>
+      <property>/controls/flight/speedbrake</property>
+      <factor>10</factor>
+    </input>
+    <x>-105</x>
+    <y>-140</y>
+    <width>15</width>
+    <height>6</height>
+    <format>spdbrk %1.0f</format>
+    <halign>right</halign>
+  </label>
 <!--
 ================================================================================
                                                                   AVIONICS INFOS

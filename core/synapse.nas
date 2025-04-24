@@ -166,8 +166,8 @@ var listen_master_ap_loop = func()
                 master_is_found = 1;
 
                 # master found, get ap settings
-                alt = list_mp_obj[i].getNode("sim/multiplay/generic/int[14]").getValue() or '';
-                speed = list_mp_obj[i].getNode("sim/multiplay/generic/int[15]").getValue() or '';
+                alt = list_mp_obj[i].getNode("sim/multiplay/generic/int[14]").getValue() or 0;
+                speed = list_mp_obj[i].getNode("sim/multiplay/generic/int[15]").getValue() or 0;
                 lat = list_mp_obj[i].getNode("sim/multiplay/generic/float[14]").getValue() or 0;
                 lng = list_mp_obj[i].getNode("sim/multiplay/generic/float[15]").getValue() or 0;
                 callsign_target = list_mp_obj[i].getNode("sim/multiplay/generic/string[1]").getValue() or 'callsign_target';
@@ -198,10 +198,9 @@ var listen_master_ap_loop = func()
                     setprop("/sim/presets/following-type", 'TARGET');
                     setprop("/sim/presets/following", callsign_target);
 
-
                     var target_true_hdg = list_mp_obj[i].getNode("orientation/true-heading-deg").getValue() or 0;
-                    var target_lat = list_mp_obj[i].getNode("position/latitude-deg").getValue() or '0';
-                    var target_lng = list_mp_obj[i].getNode("position/longitude-deg").getValue() or '0';
+                    var target_lat = list_mp_obj[i].getNode("position/latitude-deg").getValue() or 0;
+                    var target_lng = list_mp_obj[i].getNode("position/longitude-deg").getValue() or 0;
                     var target_speed = list_mp_obj[i].getNode("velocities/true-airspeed-kt").getValue() or 0;
                     var target_altitude = list_mp_obj[i].getNode("position/altitude-ft").getValue() or 0;
                     var target_range = list_mp_obj[i].getNode("radar/range-nm").getValue() or 0;
@@ -219,16 +218,8 @@ var listen_master_ap_loop = func()
                     coords_to_follow.apply_course_distance(target_true_hdg + 1, (5 * target_speed));
                     lat = coords_to_follow.lat();
                     lng = coords_to_follow.lon();
-                    if(target_range > 6)
-                    {
-                        speed = (target_speed + 400);
-                    }
-                    else
-                    {
-                        speed = (target_speed + (target_speed * speed_factor));
-                    }
+                    speed = (target_range > 6) ? (target_speed + 400) : (target_speed + (target_speed * speed_factor));
                     speed = (speed > 650) ? 650 : speed;
-                    speed = (speed < 150) ? 150 : speed;
                     alt = target_altitude + 15;
 
                     var my_position = geo.aircraft_position();
@@ -276,6 +267,7 @@ var listen_master_ap_loop = func()
 
         }
 
+        # pas de target ni de fix, on passe en hippodrome
         if((callsign_target_found == 0) and (fix_target_found == 0))
         {
             setprop("/sim/presets/following-type", '---');
@@ -283,10 +275,7 @@ var listen_master_ap_loop = func()
             setprop("/sim/presets/following-range", '');
         }
 
-        setprop("/autopilot/settings/target-speed-kt", speed);
-        setprop("/autopilot/settings/target-altitude-ft", alt);
         setprop("/autopilot/settings/heading-bug-deg", hdg);
-        #print('MASTER FOUND : setting from master : alt='~ alt ~' - speed='~ speed ~' - hdg='~ hdg);
     }
     else
     {
@@ -296,17 +285,63 @@ var listen_master_ap_loop = func()
         setprop("/sim/presets/following", 'hippodrome');
         setprop("/sim/presets/following-range", '');
 
-        setprop("/autopilot/settings/target-speed-kt", speed);
-        setprop("/autopilot/settings/target-altitude-ft", alt);
         var hippo_enabled = getprop("/instrumentation/my_aircraft/pfd/controls/hippodrome") or 0;
         if(hippo_enabled == 0)
         {
             setprop("/autopilot/settings/heading-bug-deg", hdg);
             settimer(func() { setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 1); }, 2);
-            #print('NO MASTER FOUND : setting from presets : alt='~ alt ~' - speed='~ speed ~' - hdg='~ hdg);
         }
     }
+
+    speed = (speed < 150) ? 150 : speed;
+    var current_speed = getprop("/instrumentation/airspeed-indicator/true-speed-kt") or 0;
+    if((current_speed - speed) > 30)
+    {
+        setprop("/controls/flight/speedbrake", .6);
+    }
+    elsif((current_speed - speed) > 20)
+    {
+        setprop("/controls/flight/speedbrake", .4);
+    }
+    elsif((current_speed - speed) > 10)
+    {
+        setprop("/controls/flight/speedbrake", .2);
+    }
+    else
+    {
+        setprop("/controls/flight/speedbrake", 0);
+    }
+
+    var alt_agl_ft = getprop("/position/altitude-agl-ft") or 0;
+    var alt_ft = getprop("/position/altitude-ft") or 0;
+    old_alt = alt;
+
+    alt = (alt_agl_ft < 1200) ? alt - alt_agl_ft + 1300 : alt;
+
+    setprop("/autopilot/settings/target-speed-kt", speed);
+    setprop("/autopilot/settings/target-altitude-ft", alt);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -79,25 +79,14 @@ my_aircraft_functions.event_toggle_hippodrome(1);
       <row>0</row><col>1</col>
       <legend>Off</legend>
       <binding>
-        <command>nasal</command>
-        <script>
-          <![CDATA[
-my_aircraft_functions.event_smoke(0);
-          ]]>
-        </script>
+        <command>property-assign</command>
+        <property>/sim/model/smoking-color</property>
+        <value></value>
       </binding>
     </button>
     <button>
       <row>0</row><col>2</col>
       <legend>Blue</legend>
-      <binding>
-        <command>nasal</command>
-        <script>
-          <![CDATA[
-my_aircraft_functions.event_smoke(1);
-          ]]>
-        </script>
-      </binding>
       <binding>
         <command>property-assign</command>
         <property>/sim/model/smoking-color</property>
@@ -108,14 +97,6 @@ my_aircraft_functions.event_smoke(1);
       <row>0</row><col>3</col>
       <legend>White</legend>
       <binding>
-        <command>nasal</command>
-        <script>
-          <![CDATA[
-my_aircraft_functions.event_smoke(1);
-          ]]>
-        </script>
-      </binding>
-      <binding>
         <command>property-assign</command>
         <property>/sim/model/smoking-color</property>
         <value>white</value>
@@ -124,14 +105,6 @@ my_aircraft_functions.event_smoke(1);
     <button>
       <row>0</row><col>4</col>
       <legend>Red</legend>
-      <binding>
-        <command>nasal</command>
-        <script>
-          <![CDATA[
-my_aircraft_functions.event_smoke(1);
-          ]]>
-        </script>
-      </binding>
       <binding>
         <command>property-assign</command>
         <property>/sim/model/smoking-color</property>
