@@ -605,7 +605,7 @@ vitesse affichee sur le hud
     </input>
     <output>/autopilot/internal/max-vs</output>
     <min>100</min>
-    <max>9000</max>
+    <max>15000</max>
   </filter>
 
   <predict-simple>
@@ -940,7 +940,7 @@ vitesse affichee sur le hud
       <Ti>8.0</Ti>
       <Td>0.0001</Td>
       <u_min>0.0</u_min>
-      <u_max>0.90</u_max>
+      <u_max>1</u_max>
     </config>
   </pid-controller>
 

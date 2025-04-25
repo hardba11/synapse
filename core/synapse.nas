@@ -5,7 +5,7 @@ print("*** LOADING core - synapse.nas ... ***");
 #
 #   IN THIS FILE : AIRCRAFT PROPERTIES UPDATE
 #
-
+var ap_random = rand();
 var egtf2egtc = func()
 {
     setprop("/engines/engine[0]/egt", 0);
@@ -211,16 +211,16 @@ var listen_master_ap_loop = func()
 
                     var heading_from_target = geo.normdeg(target_bearing + 180 - target_true_hdg);
                     var speed_factor = (target_range < 3) ? target_range : 4;
-                    speed_factor = speed_factor * math.cos((heading_from_target) * D2R) * -0.45;
+                    speed_factor = speed_factor * math.cos((heading_from_target + 20 + (ap_random * 10)) * D2R) * -0.6;
 
                     coords_to_follow = geo.Coord.new();
                     coords_to_follow.set_latlon(target_lat, target_lng);
-                    coords_to_follow.apply_course_distance(target_true_hdg + 1, (5 * target_speed));
+                    coords_to_follow.apply_course_distance(target_true_hdg + 1 + ap_random, (7 * target_speed));
                     lat = coords_to_follow.lat();
                     lng = coords_to_follow.lon();
                     speed = (target_range > 6) ? (target_speed + 400) : (target_speed + (target_speed * speed_factor));
                     speed = (speed > 650) ? 650 : speed;
-                    alt = target_altitude + 15;
+                    alt = target_altitude + 12 + (ap_random * 5);
 
                     var my_position = geo.aircraft_position();
                     var wp = geo.Coord.new();
@@ -317,6 +317,23 @@ var listen_master_ap_loop = func()
     old_alt = alt;
 
     alt = (alt_agl_ft < 1200) ? alt - alt_agl_ft + 1300 : alt;
+
+    if(alt > 40000)
+    {
+        setprop("/autopilot/internal/vert-speed-fpm", 2000);
+    }
+    elsif(alt > 20000)
+    {
+        setprop("/autopilot/internal/vert-speed-fpm", 4000);
+    }
+    elsif(alt > 10000)
+    {
+        setprop("/autopilot/internal/vert-speed-fpm", 8000);
+    }
+    else
+    {
+        setprop("/autopilot/internal/vert-speed-fpm", 12000);
+    }
 
     setprop("/autopilot/settings/target-speed-kt", speed);
     setprop("/autopilot/settings/target-altitude-ft", alt);
