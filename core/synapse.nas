@@ -318,21 +318,25 @@ var listen_master_ap_loop = func()
 
     alt = (alt_agl_ft < 1200) ? alt - alt_agl_ft + 1300 : alt;
 
-    if(alt > 40000)
+    if(alt_ft > 40000)
     {
-        setprop("/autopilot/internal/vert-speed-fpm", 2000);
+        setprop("/autopilot/settings/vertical-speed-fpm", 2000);
     }
-    elsif(alt > 20000)
+    if(alt_ft > 25000)
     {
-        setprop("/autopilot/internal/vert-speed-fpm", 4000);
+        setprop("/autopilot/settings/vertical-speed-fpm", 3000);
     }
-    elsif(alt > 10000)
+    elsif(alt_ft > 15000)
     {
-        setprop("/autopilot/internal/vert-speed-fpm", 8000);
+        setprop("/autopilot/settings/vertical-speed-fpm", 4000);
+    }
+    elsif(alt_ft > 8000)
+    {
+        setprop("/autopilot/settings/vertical-speed-fpm", 8000);
     }
     else
     {
-        setprop("/autopilot/internal/vert-speed-fpm", 12000);
+        setprop("/autopilot/settings/vertical-speed-fpm", 12000);
     }
 
     setprop("/autopilot/settings/target-speed-kt", speed);
