@@ -21,7 +21,7 @@ http://wiki.flightgear.org/Property_tree
     <!-- ~~~~~~~~~~~~~~~~~~ metadata -->
     <description type="string">synapse</description>
     <long-description type="string">Synapse is a loyal wingman.</long-description>
-    <aircraft-version type="string">20250406</aircraft-version>
+    <aircraft-version type="string">20250501</aircraft-version>
     <minimum-fg-version type="string">2017.1.1</minimum-fg-version>
 
     <!-- old / simple style -->

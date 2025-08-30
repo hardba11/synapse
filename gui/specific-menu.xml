@@ -34,17 +34,7 @@ changelog
           <dialog-name>synapse-commands</dialog-name>
         </binding>
       </item>
-
       <item n="1">
-        <label>Set views ...</label>
-        <name>set-views</name>
-        <binding>
-          <command>dialog-show</command>
-          <dialog-name>synapse-set-views</dialog-name>
-        </binding>
-      </item>
-
-      <item n="2">
         <label>Auto Pilot ...</label>
         <name>synapse-autopilot</name>
         <binding>
