@@ -33,6 +33,52 @@
 
   <group>
     <layout>vbox</layout>
+
+
+<!-- Target -->
+    <group>
+      <layout>table</layout>
+      <text>
+        <label>Callsign to follow</label>
+        <halign>right</halign>
+        <row>0</row>
+        <col>0</col>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/target</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+    </group>
+
+    <hrule/>
+
+<!-- Fix -->
+    <group>
+      <layout>table</layout>
+      <text>
+        <label>Fix to reach</label>
+        <halign>right</halign>
+        <row>1</row>
+        <col>0</col>
+      </text>
+      <input>
+        <row>1</row>
+        <col>1</col>
+        <property>/sim/presets/fix</property>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </input>
+    </group>
+
+    <hrule/>
+
     <group>
       <layout>table</layout>
 
@@ -55,7 +101,7 @@
           <command>nasal</command>
           <script>
             <![CDATA[
-setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
+#setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
             ]]>
           </script>
         </binding>
@@ -94,6 +140,22 @@ setprop("/instrumentation/my_aircraft/pfd/controls/hippodrome", 0);
           <command>dialog-apply</command>
         </binding>
       </input>
+
+      <text>
+        <label>Hippodrome</label>
+        <halign>right</halign>
+        <row>3</row>
+        <col>0</col>
+      </text>
+      <checkbox>
+        <row>3</row>
+        <col>1</col>
+        <property>/sim/presets/do-hippo</property>
+        <binding>
+          <command>property-toggle</command>
+          <property>/sim/presets/do-hippo</property>
+        </binding>
+      </checkbox>
 
     </group>
   </group>

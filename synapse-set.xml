@@ -51,7 +51,7 @@ http://wiki.flightgear.org/Property_tree
     </urls>
 
     <presets>
-      <my-master-callsign type="string">undef</my-master-callsign>
+      <my-master-callsign type="string"></my-master-callsign>
 
       <!-- started airborn -->
       <onground>0</onground>
@@ -61,9 +61,11 @@ http://wiki.flightgear.org/Property_tree
       <altitude-ft>20000</altitude-ft>
       <airspeed-kt>400</airspeed-kt>
       <heading-deg>360</heading-deg>
+      <target stype="string"></target>
+      <fix stype="string"></fix>
       <following-type stype="string"></following-type>
-      <following stype="string"></following>
       <following-range stype="string"></following-range>
+      <do-hippo stype="bool">0</do-hippo>
 
     </presets>
 

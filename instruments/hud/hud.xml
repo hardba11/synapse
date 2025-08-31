@@ -95,6 +95,12 @@ see :
     <format>MASTER</format>
     <halign>left</halign>
     <box>false</box>
+    <condition>
+      <not-equals>
+        <property>/sim/presets/my-master-callsign</property>
+        <value></value>
+      </not-equals>
+    </condition>
   </label>
   <label>
     <name>callsign</name>
@@ -107,6 +113,12 @@ see :
     </input>
     <halign>left</halign>
     <box>false</box>
+    <condition>
+      <not-equals>
+        <property>/sim/presets/my-master-callsign</property>
+        <value></value>
+      </not-equals>
+    </condition>
   </label>
   <label>
     <name>following type</name>
@@ -127,13 +139,48 @@ see :
     <width>60</width>
     <height>10</height>
     <input>
-      <property>/sim/presets/following</property>
+      <property>/sim/presets/target</property>
     </input>
     <halign>left</halign>
     <box>false</box>
+    <condition>
+      <equals>
+        <property>/sim/presets/following-type</property>
+        <value>TARGET</value>
+      </equals>
+    </condition>
   </label>
   <label>
-    <name>target</name>
+    <name>fix</name>
+    <x>-125</x>
+    <y>4</y>
+    <width>60</width>
+    <height>10</height>
+    <input>
+      <property>/sim/presets/fix</property>
+    </input>
+    <halign>left</halign>
+    <box>false</box>
+    <condition>
+      <or>
+        <equals>
+          <property>/sim/presets/following-type</property>
+          <value>AIRPRT</value>
+        </equals>
+        <equals>
+          <property>/sim/presets/following-type</property>
+          <value>FIX</value>
+        </equals>
+        <equals>
+          <property>/sim/presets/following-type</property>
+          <value>NDB</value>
+        </equals>
+      </or>
+    </condition>
+
+  </label>
+  <label>
+    <name>range</name>
     <x>-125</x>
     <y>-6</y>
     <width>60</width>
@@ -144,6 +191,13 @@ see :
     <format>%.1f NM</format>
     <halign>left</halign>
     <box>false</box>
+    <condition>
+      <not-equals>
+        <property>/sim/presets/following-range</property>
+        <value></value>
+      </not-equals>
+    </condition>
+
   </label>
 
   <label>
