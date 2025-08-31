@@ -107,7 +107,7 @@ var hippo_turn = func()
 
 var hippo_loop = func()
 {
-    print("+++ hippo_loop");
+    #print("+++ hippo_loop");
     var hippo_enabled = getprop("/instrumentation/my_aircraft/pfd/controls/hippodrome") or 0;
     if(hippo_enabled == 1)
     {
@@ -370,7 +370,7 @@ var listen_master_ap_loop = func()
     }
 
     var infos_to_callsign = get_infos_to_callsign(callsign_target);
-    if(size(callsign_target) == 4)
+    if(size(infos_to_callsign) == 4)
     {
         alt = infos_to_callsign[0];
         speed = infos_to_callsign[1];
